@@ -610,7 +610,8 @@ class FishingIterator(BaseEffectIterator[FishingConfig]):
                 self._advance_wrong_catch(hook)
             elif hook.phase is HookPhase.RETURNING and hook.hook_character.motion.active_path is None:
                 self._finish_returning(hook)
-            elif hook.phase is HookPhase.WAITING and hook.assignments:
+            # A wrong catch retries the retained target even when the queue is empty.
+            elif hook.phase is HookPhase.WAITING and (hook.target is not None or hook.assignments):
                 if hook.delay:
                     hook.delay -= 1
                 else:

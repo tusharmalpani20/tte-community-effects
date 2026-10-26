@@ -387,14 +387,15 @@ def test_fishing_bite_ripple_uses_and_returns_a_preallocated_particle() -> None:
     assert ripple in iterator.ripple_pool.available
 
 
-def test_fishing_wrong_catches_are_one_per_hook_harmless_and_cleaned_up() -> None:
+@pytest.mark.parametrize("input_data", ["A", "AB", "ABCD"])
+def test_fishing_wrong_catches_are_one_per_hook_harmless_and_cleaned_up(input_data: str) -> None:
     """Forced junk catches should remain bounded auxiliaries and never replace input targets."""
     module = import_module("effect_fishing")
     terminal_config = TerminalConfig._build_config()
     terminal_config.canvas_width = 10
     terminal_config.canvas_height = 6
     terminal_config.frame_rate = 0
-    effect = module.Fishing("ABCD", terminal_config=terminal_config)
+    effect = module.Fishing(input_data, terminal_config=terminal_config)
     effect.effect_config.hook_count = 2
     effect.effect_config.cast_delay = 0
     effect.effect_config.cast_speed = 10

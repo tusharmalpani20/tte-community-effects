@@ -14,11 +14,12 @@ from terminaltexteffects.engine.base_config import (
     FinalGradientStepsArg,
     FinalGradientStopsArg,
 )
-from terminaltexteffects.engine.base_effect import BaseEffect, BaseEffectIterator
-from terminaltexteffects.engine.effect_support.particles import ParticlePool, ParticleReset
 from terminaltexteffects.utils import argutils, easing
 from terminaltexteffects.utils.geometry import Coord
 from terminaltexteffects.utils.graphics import Color, ColorPair, Gradient
+from tte_community_support.base import CommunityEffect as BaseEffect
+from tte_community_support.base import CommunityEffectIterator as BaseEffectIterator
+from tte_community_support.particles import ParticlePool, ParticleReset
 
 
 def get_effect_resources() -> tuple[str, type[BaseEffect], type[BaseConfig]]:
@@ -300,19 +301,19 @@ class FirefliesIterator(BaseEffectIterator[FirefliesConfig]):
         landing_scene.add_frame(
             self.config.firefly_symbols[-1],
             2,
-            colors=ColorPair(fg=peak_color, bg=final_colors.bg),
+            colors=ColorPair(fg=peak_color, bg=final_colors.bg_color),
         )
         landing_scene.add_frame(
             character.input_symbol,
             2,
-            colors=ColorPair(fg=peak_color, bg=final_colors.bg),
+            colors=ColorPair(fg=peak_color, bg=final_colors.bg_color),
         )
-        if final_colors.fg is not None:
-            for color in Gradient(peak_color, final_colors.fg, steps=4):
+        if final_colors.fg_color is not None:
+            for color in Gradient(peak_color, final_colors.fg_color, steps=4):
                 landing_scene.add_frame(
                     character.input_symbol,
                     2,
-                    colors=ColorPair(fg=color, bg=final_colors.bg),
+                    colors=ColorPair(fg=color, bg=final_colors.bg_color),
                 )
         else:
             landing_scene.add_frame(
@@ -320,7 +321,7 @@ class FirefliesIterator(BaseEffectIterator[FirefliesConfig]):
                 2,
                 colors=ColorPair(
                     fg=Animation.adjust_color_brightness(peak_color, 0.55),
-                    bg=final_colors.bg,
+                    bg=final_colors.bg_color,
                 ),
             )
         landing_scene.add_frame(character.input_symbol, 2, colors=final_colors)
@@ -330,12 +331,12 @@ class FirefliesIterator(BaseEffectIterator[FirefliesConfig]):
         pulse_scene.add_frame(
             character.input_symbol,
             2,
-            colors=ColorPair(fg=peak_color, bg=final_colors.bg),
+            colors=ColorPair(fg=peak_color, bg=final_colors.bg_color),
         )
         pulse_scene.add_frame(
             character.input_symbol,
             2,
-            colors=ColorPair(fg=self.config.firefly_colors[-1], bg=final_colors.bg),
+            colors=ColorPair(fg=self.config.firefly_colors[-1], bg=final_colors.bg_color),
         )
         pulse_scene.add_frame(character.input_symbol, 2, colors=final_colors)
 

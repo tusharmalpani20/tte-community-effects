@@ -15,7 +15,7 @@ import pytest
 from terminaltexteffects import __main__
 import effect_fireflies
 from terminaltexteffects.engine.terminal import TerminalConfig
-from terminaltexteffects.utils.exceptions.terminal_exceptions import EmptyInputError
+from tte_community_support.base import EmptyInputError
 from terminaltexteffects.utils.graphics import Color, ColorPair, Gradient
 
 if TYPE_CHECKING:
@@ -194,7 +194,7 @@ def test_fireflies_receive_varied_blink_motion_and_cluster_schedules() -> None:
         assert (
             len(
                 {
-                    frame.character_visual.colors.fg
+                    frame.character_visual.colors.fg_color
                     for frame in blink_scene.frames
                     if frame.character_visual.colors is not None
                 }
@@ -334,7 +334,7 @@ def test_fireflies_terminates_and_restores_representative_inputs(input_data: str
 
 @pytest.mark.parametrize("input_data", ["", "   \n "])
 def test_fireflies_rejects_input_without_visible_characters(input_data: str) -> None:
-    """Empty library input follows the upstream engine contract."""
+    """Empty library input follows the collection contract."""
     with pytest.raises(EmptyInputError):
         _make_iterator(input_data)
 

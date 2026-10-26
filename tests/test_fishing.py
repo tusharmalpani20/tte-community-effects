@@ -15,7 +15,7 @@ import pytest
 from terminaltexteffects.engine.base_config import BaseConfig
 from terminaltexteffects.engine.base_effect import BaseEffect, BaseEffectIterator
 from terminaltexteffects.engine.terminal import TerminalConfig
-from terminaltexteffects.utils.exceptions.terminal_exceptions import EmptyInputError
+from tte_community_support.base import EmptyInputError
 from terminaltexteffects.utils.graphics import Color, ColorPair, Gradient
 
 
@@ -532,7 +532,7 @@ def test_fishing_final_colors_follow_terminal_color_handling(
 
 @pytest.mark.parametrize("input_data", ["", "   \n  "])
 def test_fishing_rejects_input_without_visible_characters(input_data: str) -> None:
-    """Empty library input follows the upstream engine contract."""
+    """Empty library input follows the collection contract."""
     module = import_module("effect_fishing")
     with pytest.raises(EmptyInputError):
         iter(module.Fishing(input_data))

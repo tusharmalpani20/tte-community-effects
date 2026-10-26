@@ -1,3 +1,23 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "tte-community-effects"
+version = "0.1.0"
+description = "Community text animations and shared support for TerminalTextEffects 0.15.0"
+readme = "README.md"
+requires-python = ">=3.9.2"
+license = "MIT"
+authors = [{name = "Tushar Malpani"}]
+dependencies = ["terminaltexteffects==0.15.0"]
+
+[project.urls]
+Repository = "https://github.com/tusharmalpani20/tte-community-effects"
+
+[tool.hatch.build.targets.wheel]
+packages = ["tte_community_support"]
+
 [tool.pytest.ini_options]
 pythonpath = ["effects"]
 testpaths = ["tests"]

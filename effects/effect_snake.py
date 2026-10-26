@@ -13,10 +13,11 @@ from terminaltexteffects.engine.base_config import (
     FinalGradientStepsArg,
     FinalGradientStopsArg,
 )
-from terminaltexteffects.engine.base_effect import BaseEffect, BaseEffectIterator
 from terminaltexteffects.utils import argutils
 from terminaltexteffects.utils.geometry import Coord
 from terminaltexteffects.utils.graphics import Color, ColorPair, Gradient
+from tte_community_support.base import CommunityEffect as BaseEffect
+from tte_community_support.base import CommunityEffectIterator as BaseEffectIterator
 
 
 def get_effect_resources() -> tuple[str, type[BaseEffect], type[BaseConfig]]:
@@ -192,8 +193,8 @@ class SnakeIterator(BaseEffectIterator[SnakeConfig]):
         final_colors: ColorPair,
     ) -> None:
         settle_scene = character.animation.new_scene(scene_id="settle")
-        final_fg = final_colors.fg
-        final_bg = final_colors.bg
+        final_fg = final_colors.fg_color
+        final_bg = final_colors.bg_color
         if self.terminal.config.existing_color_handling == "dynamic":
             if final_fg or final_bg:
                 settle_scene.apply_gradient_to_symbols(

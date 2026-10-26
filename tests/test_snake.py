@@ -9,7 +9,7 @@ import pytest
 
 import effect_snake
 from terminaltexteffects.engine.terminal import TerminalConfig
-from terminaltexteffects.utils.exceptions.terminal_exceptions import EmptyInputError
+from tte_community_support.base import EmptyInputError
 from terminaltexteffects.utils.geometry import Coord
 from terminaltexteffects.utils.graphics import Color, ColorPair, Gradient
 
@@ -291,7 +291,7 @@ def test_snake_tiny_canvas_clamps_to_the_retained_character() -> None:
 
 @pytest.mark.parametrize("input_data", ["", "   \n  "])
 def test_snake_rejects_input_without_visible_characters(input_data: str) -> None:
-    """Empty library input follows the upstream engine contract."""
+    """Empty library input follows the collection contract."""
     effect = effect_snake.Snake(input_data)
     effect.terminal_config = _make_terminal_config()
     with pytest.raises(EmptyInputError):

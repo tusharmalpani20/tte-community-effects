@@ -1,2 +1,2 @@
-# Tested upstream development revision; released TTE 0.15.0 lacks required helpers.
-terminaltexteffects @ git+https://github.com/ChrisBuilds/terminaltexteffects.git@b75a7baefe89a25d22754bcefb7d5caae8809477
+# Install the collection support package and its released TTE dependency.
+.
